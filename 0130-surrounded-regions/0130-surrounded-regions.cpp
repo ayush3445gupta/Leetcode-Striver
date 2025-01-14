@@ -31,7 +31,7 @@ for (int i = 0; i <m; i++){
     }
 }
 // first and last col
-for (int i = 0; i <m; i++){
+for (int i = 0; i <n; i++){
     if(board[i][0]=='O' && !vis[i][0]){
         dfs(i,0,vis,board,delRow,delCol);
     }
