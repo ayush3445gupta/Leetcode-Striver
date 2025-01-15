@@ -6,7 +6,7 @@ public:
     for (int i = 0; i <4; i++)
     {
         int nrow=row+delrow[i],ncol=col+delcol[i];
-        if(nrow>=0 && row<n && ncol>=0 && ncol<m && vis[nrow][ncol]==0 && grid[nrow][ncol]==1){
+        if(nrow>=0 && nrow<n && ncol>=0 && ncol<m && vis[nrow][ncol]==0 && grid[nrow][ncol]==1){
             dfs(nrow,ncol,grid,vis,delrow,delcol);
         } 
     }   
