@@ -7,12 +7,13 @@ int totalFruit(vector<int>& fruits) {
      unordered_map<int,int>mp;
      while (right<n)
      {
-        mp[fruits[right]]=right;
+        mp[fruits[right]]++;
         while (left<right && mp.size()>2)
         {
-            int k=mp[fruits[left]]+1;
-            mp.erase(fruits[left]);
-            left=max(left,k);
+            mp[fruits[left]]--;
+            if(mp[fruits[left]]==0)mp.erase(fruits[left]);
+            left++;
+            
         }
         mx=max(mx,right-left+1);
         right++;
