@@ -15,7 +15,7 @@ int characterReplacement(string s, int k) {
             for (int i = 0; i < 26; i++) maxFreq=max(maxFreq,hash[i]);
             left++;
         }
-        if((right-left+1)-maxFreq<=k)maxLen=max(maxLen,right-left+1);
+        maxLen=max(maxLen,right-left+1);
         right++;
      }
      return maxLen;
