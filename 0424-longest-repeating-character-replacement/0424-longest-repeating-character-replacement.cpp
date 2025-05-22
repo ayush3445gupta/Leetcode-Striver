@@ -9,10 +9,9 @@ int characterReplacement(string s, int k) {
         hash[s[right]-'A']++;
         maxFreq=max(maxFreq,hash[s[right]-'A']);
         while (left<right && (right-left+1)-maxFreq>k)
-        {
+            {
             hash[s[left]-'A']--;
-            maxFreq=0;
-            for (int i = 0; i < 26; i++) maxFreq=max(maxFreq,hash[i]);
+            maxFreq=max(maxFreq,hash[s[left]-'A']);
             left++;
         }
         maxLen=max(maxLen,right-left+1);
