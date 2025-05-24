@@ -10,7 +10,7 @@ ll countSubarrays(vector<int>& nums, int k) {
      while (j<n)
      {
         if(nums[j]==mx)cnt_mx++;
-        while (cnt_mx>=k && i<j)
+        while (cnt_mx>=k)
         {
             ans+=(n-j);
             if(nums[i]==mx)cnt_mx--;
