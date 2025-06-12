@@ -1,20 +1,37 @@
 class Solution {
 public:
-    int partitionString(string s) {
+//     int partitionString(string s) {
+//     int n=s.length();
+//    unordered_set<char>st;
+//     int count=0;
+//     int i=0,j=0;
+//     while (j<n)
+//     {
+//         if(st.find(s[j])!=st.end()){
+//             count++;
+//             st.clear();
+//         }
+//         st.insert(s[j]);
+//         j++;
+//     }
+//     if(st.empty())return count;
+//     return count+1;
+//     }
+int partitionString(string s) {
     int n=s.length();
-   unordered_set<char>st;
+    int lastSeen[26]={-1};
     int count=0;
-    int i=0,j=0;
-    while (j<n)
+    int start_substring = 0;
+
+    for (int i = 0; i < n; i++)
     {
-        if(st.find(s[j])!=st.end()){
+        char ch=s[i];
+        if(lastSeen[ch-'a']>=start_substring){
             count++;
-            st.clear();
+            start_substring=i;
         }
-        st.insert(s[j]);
-        j++;
+        lastSeen[ch-'a']=i;
     }
-    if(st.empty())return count;
     return count+1;
     }
 };
