@@ -19,7 +19,7 @@ public:
 //     }
 int partitionString(string s) {
     int n=s.length();
-    int lastSeen[26]={-1};
+    int lastSeen[26]={};
     int count=0;
     int start_substring = 0;
 
@@ -28,10 +28,10 @@ int partitionString(string s) {
         char ch=s[i];
         if(lastSeen[ch-'a']>=start_substring){
             count++;
-            start_substring=i;
+            start_substring=i+1;
         }
-        lastSeen[ch-'a']=i;
+        lastSeen[ch-'a']=i+1;
     }
-    return count+1;
+    return count;
     }
 };
