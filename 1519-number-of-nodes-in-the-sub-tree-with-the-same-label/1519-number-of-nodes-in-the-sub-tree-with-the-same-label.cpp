@@ -29,7 +29,7 @@ public:
 //      return ans;
 //     }
 
-void solve(vector<vector<int>>&adj,int node,string labels,int parent,vector<int>&ans,vector<int>&count){
+void solve(vector<vector<int>>&adj,int node,string& labels,int parent,vector<int>&ans,vector<int>&count){
 
     char mylabel = labels[node];
     int count_before_visitin_curr_children=count[mylabel-'a'];
