@@ -15,10 +15,11 @@ vector<vector<int>> sortMatrix(vector<vector<int>>& grid) {
         }
         sort(rbegin(temp),rend(temp));
         col=0;
-        while (row<n && col<n)
+        temprow=row;
+        while (temprow<n && col<n)
         {
-            grid[row][col] = temp[col];
-            row++;col++;
+            grid[temprow][col] = temp[col];
+            temprow++;col++;
         }
     }
     
@@ -35,12 +36,12 @@ vector<vector<int>> sortMatrix(vector<vector<int>>& grid) {
        sort(begin(temp),end(temp));
 
        row=0;
-       while (row<n && col<n)
+       tempcol=col;
+       while (row<n && tempcol<n)
        {
-        grid[row][col]=temp[row];
-        row++,col++;
-       }
-       
+        grid[row][tempcol]=temp[row];
+        row++,tempcol++;
+       }  
     }
      return grid;
     }
