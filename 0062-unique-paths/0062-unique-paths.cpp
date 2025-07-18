@@ -31,24 +31,49 @@ public:
 //     }
 //     return dp[m-1][n-1];    
 // }
+// int uniquePaths(int m, int n) {
+//     vector<vector<int>>dp(m,vector<int>(n,-1));
+//     vector<int>prev(n,1);
+//     // for (int row= 0; row < m; row++)dp[row][0]=1;
+//     // for (int col= 0; col < n; col++)dp[0][col]=1;
+
+//     for (int i = 1; i <m; i++)
+//     {
+//         vector<int>temp(n,1);
+//         for (int j = 1; j < n; j++)
+//         {
+//            int down=prev[j];
+//            int right=temp[j-1];
+
+//            temp[j]=down+right;
+//         }  
+//         prev=temp;  
+//     }
+//     return prev[n-1];    
+// }
+
+
+
+// 
+
+int f(int row,int col,vector<vector<int>>&dp){
+    // basecase
+    if(row==0 && col==0)return 1;
+    if(dp[row][col]!=-1)return dp[row][col];
+
+    // move up and left
+    int up=0,left=0;
+    if(row>0)up=f(row-1,col,dp);
+    if(col>0)left=f(row,col-1,dp);
+
+    return dp[row][col]=up+left;
+
+}
 int uniquePaths(int m, int n) {
+    int row=m,col=n;
+    // lets assume i am at (m-1,n-1) and i have to reach (0,0) memoization approach move up and left
+
     vector<vector<int>>dp(m,vector<int>(n,-1));
-    vector<int>prev(n,1);
-    // for (int row= 0; row < m; row++)dp[row][0]=1;
-    // for (int col= 0; col < n; col++)dp[0][col]=1;
-
-    for (int i = 1; i <m; i++)
-    {
-        vector<int>temp(n,1);
-        for (int j = 1; j < n; j++)
-        {
-           int down=prev[j];
-           int right=temp[j-1];
-
-           temp[j]=down+right;
-        }  
-        prev=temp;  
-    }
-    return prev[n-1];    
+    return f(m-1,n-1,dp);
 }
 };
