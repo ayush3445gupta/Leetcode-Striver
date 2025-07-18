@@ -43,31 +43,53 @@ public:
 //       return dp[n-1][m-1];
 //     }
 
-int minPathSum(vector<vector<int>>& grid) {
-    int m=grid.size(),n=grid[0].size();
-    vector<int>prev(n,0);
-    // basecase
+// int minPathSum(vector<vector<int>>& grid) {
+//     int m=grid.size(),n=grid[0].size();
+//     vector<int>prev(n,0);
+//     // basecase
    
-    for (int i = 0; i < m; i++)
-    {
-        vector<int>temp(n,0);
-        for (int j = 0; j < n; j++)
-        {
-            if(i==0 && j==0)temp[j]=grid[i][j];
-            else{
-            int down=grid[i][j];
-            int right=grid[i][j];
-            if(i>0)down+=prev[j];
-            else down+=1e9;
+//     for (int i = 0; i < m; i++)
+//     {
+//         vector<int>temp(n,0);
+//         for (int j = 0; j < n; j++)
+//         {
+//             if(i==0 && j==0)temp[j]=grid[i][j];
+//             else{
+//             int down=grid[i][j];
+//             int right=grid[i][j];
+//             if(i>0)down+=prev[j];
+//             else down+=1e9;
 
-            if(j>0)right+=temp[j-1];
-            else right+=1e9;
+//             if(j>0)right+=temp[j-1];
+//             else right+=1e9;
 
-            temp[j]=min(down,right);
-        }
-        }
-        prev=temp;
-    }
-    return prev[n-1];
+//             temp[j]=min(down,right);
+//         }
+//         }
+//         prev=temp;
+//     }
+//     return prev[n-1];
+// }
+
+
+int f(int row,int col,vector<vector<int>>& grid,vector<vector<int>>& dp){
+
+    // basecase
+    if(row==0 && col==0)return grid[row][col];
+    
+    if(dp[row][col]!=-1)return dp[row][col];
+
+    int up=INT_MAX,left=INT_MAX;
+    if(row>0)up=grid[row][col]+f(row-1,col,grid,dp);
+    if(col>0)left=grid[row][col]+f(row,col-1,grid,dp);
+
+    return dp[row][col]=min(up,left);
+}
+int minPathSum(vector<vector<int>>& grid) {
+    int row=grid.size(),col=grid[0].size();
+
+    vector<vector<int>>dp(row,vector<int>(col,-1));
+
+    return f(row-1,col-1,grid,dp);
 }
 };
