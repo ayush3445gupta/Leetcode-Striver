@@ -2,7 +2,7 @@ class Solution {
 public:
 string answerString(string word, int numFriends) {
       int n=word.length();
-      if(n==1)return word;
+      if(numFriends==1)return word;
       char mx_char='a';
       for (int i = 0; i < n; i++)
         if(word[i]>mx_char)mx_char=word[i];
