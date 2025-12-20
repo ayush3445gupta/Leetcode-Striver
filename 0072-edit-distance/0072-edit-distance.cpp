@@ -24,30 +24,54 @@ public:
 // return dp[n][m];  
 //    }
 
+// 20-12-25
 
 int  n,m;
+// int solve(int i,int j,string& s,string& t,vector<vector<int>>&dp){
+//     // basecase
+//     if(i==n && j==m)return 0;
+//     if(i==n || j==m)  return n+m-i-j;
+    
+//     if(dp[i][j]!=-1)return dp[i][j];
+//     int op1=0;
+//     if(s[i]==t[j]) return dp[i][j]=solve(i+1,j+1,s,t,dp);
+//     else{
+//         return dp[i][j]=1+min(
+//             {solve(i+1,j,s,t,dp), // delete
+//             solve(i+1,j+1,s,t,dp), // replace
+//             solve(i,j+1,s,t,dp)}   // insert
+//         );
+//     }
+// }
+// // memoization code
+
+// int minDistance(string &word1, string &word2) {
+//     n=word1.length(),m=word2.length();
+//     // we have 3 options insert, delete or replace at each index
+//     vector<vector<int>>dp(n+1,vector<int>(m+1,-1));
+//     return solve(0,0,word1,word2,dp);
+// }
+
 int solve(int i,int j,string& s,string& t,vector<vector<int>>&dp){
     // basecase
-    if(i==n && j==m)return 0;
-    if(i==n || j==m)  return n+m-i-j;
+    if(i==0 || j==0)  return i+j;
     
     if(dp[i][j]!=-1)return dp[i][j];
     int op1=0;
-    if(s[i]==t[j]) return dp[i][j]=solve(i+1,j+1,s,t,dp);
+    if(s[i-1]==t[j-1]) return dp[i][j]=solve(i-1,j-1,s,t,dp);
     else{
         return dp[i][j]=1+min(
-            {solve(i+1,j,s,t,dp), // delete
-            solve(i+1,j+1,s,t,dp), // replace
-            solve(i,j+1,s,t,dp)}   // insert
+            {solve(i-1,j,s,t,dp), // delete
+            solve(i-1,j-1,s,t,dp), // replace
+            solve(i,j-1,s,t,dp)}   // insert
         );
     }
 }
-// memoization code
-
+// bottom up memoization
 int minDistance(string &word1, string &word2) {
     n=word1.length(),m=word2.length();
     // we have 3 options insert, delete or replace at each index
     vector<vector<int>>dp(n+1,vector<int>(m+1,-1));
-    return solve(0,0,word1,word2,dp);
+    return solve(n,m,word1,word2,dp);
 }
 };
