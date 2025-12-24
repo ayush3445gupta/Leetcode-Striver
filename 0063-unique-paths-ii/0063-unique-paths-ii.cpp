@@ -21,34 +21,63 @@ public:
 
 // 18-07-25
 // space optimised
-int uniquePathsWithObstacles(vector<vector<int>>& obstacleGrid){
-    int row=obstacleGrid.size(),col=obstacleGrid[0].size();
-    vector<int>prev(col,0);
-    if(obstacleGrid[0][0]==1 || obstacleGrid[row-1][col-1]==1)return 0;
+// int uniquePathsWithObstacles(vector<vector<int>>& obstacleGrid){
+//     int row=obstacleGrid.size(),col=obstacleGrid[0].size();
+//     vector<int>prev(col,0);
+//     if(obstacleGrid[0][0]==1 || obstacleGrid[row-1][col-1]==1)return 0;
 
-    for (int i = 0; i < row; i++)
-    {
-        vector<int>temp(col,0);
-        for (int j = 0; j < col; j++)
-        {
-            if(i==0 && j==0){
-            temp[j]=1;
-            continue;
-          }
-          if(obstacleGrid[i][j]==1){
-            temp[j]=0;
-            continue;
-          }
+//     for (int i = 0; i < row; i++)
+//     {
+//         vector<int>temp(col,0);
+//         for (int j = 0; j < col; j++)
+//         {
+//             if(i==0 && j==0){
+//             temp[j]=1;
+//             continue;
+//           }
+//           if(obstacleGrid[i][j]==1){
+//             temp[j]=0;
+//             continue;
+//           }
          
-          int down=0,right=0;
-          if(i>0)down=prev[j];
-          if(j>0)right=temp[j-1];
+//           int down=0,right=0;
+//           if(i>0)down=prev[j];
+//           if(j>0)right=temp[j-1];
 
-          temp[j]=down+right;
+//           temp[j]=down+right;
+//         }
+//         prev=temp;
+//         }
+//     return prev[col-1];
+// }
+
+
+int m,n;
+int dp[101][101];
+int uniquePathsWithObstacles(vector<vector<int>>& obstacleGrid){
+    m=obstacleGrid.size();
+    n=obstacleGrid[0].size();
+        if(obstacleGrid[0][0]==1 || obstacleGrid[m-1][n-1]==1)return 0;
+    memset(dp,0,sizeof(dp));
+    dp[0][0]=1;
+
+    for (int i = 0; i < m; i++)
+    {
+        for (int j = 0; j < n; j++)
+        {
+            if(i==j && j==0){
+                dp[i][j]=1;
+                continue;
+            }
+           if(obstacleGrid[i][j]==1){
+            dp[i][j]=0;continue;
+           }
+           int up=0,left=0;
+           if(i>0)up=dp[i-1][j];
+           if(j>0)left=dp[i][j-1];
+            dp[i][j]=up+left;
         }
-        prev=temp;
-        }
-    return prev[col-1];
+    }
+    return dp[m-1][n-1];
 }
-
 };
