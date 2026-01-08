@@ -22,7 +22,7 @@ int solve(int i,vector<int>& startTime, vector<int>& endTime, vector<int>& profi
      if( dp[i]!=-1)return dp[i];
 
     int skip=solve(i+1,startTime,endTime,profit,dp);
-    int next_id = find(startTime[i],endTime[i],startTime);
+    int next_id = find(i,endTime[i],startTime);
     int take=profit[i] + solve(next_id,startTime,endTime,profit,dp);
     return dp[i]=max(take,skip);
 }
